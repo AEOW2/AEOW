@@ -183,14 +183,13 @@
 				
 					const formData = new FormData(event.target);
 				
-					fetch('https://script.google.com/macros/s/AKfycbyWOIzYVnzf_xFSovOTy6-wFZShsHM-5v6aq6Uev8UPIx1Dhz9x5yarklaidW8ge7idGw/exec',
-					      {
+					fetch('https://script.google.com/macros/s/AKfycbwHzUfGaET1yPX2R0AszwF--0c6E_pbuHElQSZZX-4PKh0vwy4x6HalRqCme5UYBsTbfA/exec',{
 						method: 'POST',
 						body: formData
 					})
 					.then(response => response.json())
 					.then(data => {
-						alert('Form successfully submitted');
+						alert('successful');
 						console.log(data);
 					})
 					.catch(error => {
