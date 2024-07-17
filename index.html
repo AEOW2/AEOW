@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -293,26 +292,32 @@
 </section>
 <head>
    
-    <!-- Testimonial Submission Form -->
-    <section class="wrapper style1 align-center">
-        <div class="inner">
-            <h3><B>Please Share Your Testimonies</B></h3>
-            <form id="testimoniesForm" action="submit-testimonies.php" method="POST">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required><br><br>
+ <!-- Testimonial Submission Form -->
+<section class="wrapper style1 align-center">
+    <div class="inner">
+        <h3><b>Please Share Your Testimonies</b></h3>
+        <form id="testimoniesForm" action="submit-testimonies.php" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
 
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
 
-" required><br><br>
+            <label for="testimonies">Testimonies:</label><br>
+            <textarea id="testimonies" name="testimonies" rows="4" required></textarea><br><br>
 
-                <label for="testimonies">Testimonies:</label><br>
-                <textarea id="testimonies" name="testimonies" rows="4" required></textarea><br><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</section>
 
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-    </section>
+<!-- Testimonials Display -->
+<section class="wrapper style1 align-center">
+    <div class="inner">
+        <h3><b>Testimonials</b></h3>
+        <iframe src="https://script.google.com/macros/s/AKfycbxJ2G33eI6Goe7GA6WQ8FNJIiGRm4uVc84uiXU8uEIygbn7Bx7CYe5jGdxOMejv0ULwhQ/exec" width="100%" height="500px" style="border: none;"></iframe>
+    </div>
+</section>
 
     <!-- Footer -->
     <footer class="wrapper style1 align-center">
