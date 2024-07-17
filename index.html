@@ -315,43 +315,66 @@
 <section class="wrapper style1 align-center">
     <div class="inner">
         <h3><b>Testimonials</b></h3>
-        <iframe src="https://script.google.com/macros/s/AKfycbz6P-EHDOmHCJmMkq2LHjsBBZ_P06ypmDqYFIgKR8RocliWujyjTv39qo5PycxAqHEmKg/exec
-" width="100%" height="500px" style="border: none;"></iframe>
+        <div id="testimonialsContainer"></div>
     </div>
 </section>
 
 <script>
-document.getElementById('testimoniesForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('testimoniesForm');
+    const testimonialsContainer = document.getElementById('testimonialsContainer');
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxvnxTYVzhVxlBJNXPSmNFKPHJqbSlH2OUKgmxbNMUGPQYXg70XHlD03oVh-NgJguHSdA/exec';
 
-    var formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        testimonies: document.getElementById('testimonies').value
-    };
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
 
-    fetch('https://script.google.com/macros/s/AKfycbz6P-EHDOmHCJmMkq2LHjsBBZ_P06ypmDqYFIgKR8RocliWujyjTv39qo5PycxAqHEmKg/exec
-', {
-        method: 'POST',
-        body: JSON.stringify(formData),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            alert('Testimony submitted successfully!');
-            // Optionally, refresh the testimonials iframe to show the new submission
-            document.querySelector('iframe').src += '';
-        } else {
-            alert('Failed to submit testimony');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('There was an error submitting the form');
+        const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            testimonies: document.getElementById('testimonies').value
+        };
+
+        fetch(scriptURL, {
+            method: 'POST',
+            body: JSON.stringify(formData),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert('Testimony submitted successfully!');
+                form.reset(); // Reset the form
+                loadTestimonials(); // Refresh testimonials
+            } else {
+                alert('Failed to submit testimony');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error submitting the form');
+        });
     });
+
+    function loadTestimonials() {
+        fetch(scriptURL + '?action=getTestimonials')
+            .then(response => response.json())
+            .then(data => {
+                testimonialsContainer.innerHTML = '';
+                data.forEach(testimonial => {
+                    const testimonialElement = document.createElement('div');
+                    testimonialElement.innerHTML = `<p><strong>${testimonial[0]}</strong> (${testimonial[1]}): ${testimonial[2]}</p>`;
+                    testimonialsContainer.appendChild(testimonialElement);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                testimonialsContainer.innerHTML = 'Failed to load testimonials';
+            });
+    }
+
+    loadTestimonials(); // Load testimonials on page load
 });
 </script>
 
