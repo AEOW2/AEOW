@@ -292,11 +292,11 @@
 </section>
 <head>
    
- <!-- Testimonial Submission Form -->
+<!-- Testimonial Submission Form -->
 <section class="wrapper style1 align-center">
     <div class="inner">
         <h3><b>Please Share Your Testimonies</b></h3>
-        <form id="testimoniesForm" action="submit-testimonies.php" method="POST">
+        <form id="testimoniesForm">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required><br><br>
 
@@ -315,9 +315,45 @@
 <section class="wrapper style1 align-center">
     <div class="inner">
         <h3><b>Testimonials</b></h3>
-        <iframe src="https://script.google.com/macros/s/AKfycbxJ2G33eI6Goe7GA6WQ8FNJIiGRm4uVc84uiXU8uEIygbn7Bx7CYe5jGdxOMejv0ULwhQ/exec" width="100%" height="500px" style="border: none;"></iframe>
+        <iframe src="https://script.google.com/macros/s/AKfycbz6P-EHDOmHCJmMkq2LHjsBBZ_P06ypmDqYFIgKR8RocliWujyjTv39qo5PycxAqHEmKg/exec
+" width="100%" height="500px" style="border: none;"></iframe>
     </div>
 </section>
+
+<script>
+document.getElementById('testimoniesForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    var formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        testimonies: document.getElementById('testimonies').value
+    };
+
+    fetch('https://script.google.com/macros/s/AKfycbz6P-EHDOmHCJmMkq2LHjsBBZ_P06ypmDqYFIgKR8RocliWujyjTv39qo5PycxAqHEmKg/exec
+', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert('Testimony submitted successfully!');
+            // Optionally, refresh the testimonials iframe to show the new submission
+            document.querySelector('iframe').src += '';
+        } else {
+            alert('Failed to submit testimony');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('There was an error submitting the form');
+    });
+});
+</script>
 
     <!-- Footer -->
     <footer class="wrapper style1 align-center">
